@@ -5,13 +5,16 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+
+
 public class LCLSystem {
 	
 	
 	private JFrame frame; //Frame that will contain the circuit panel.
 	private LCLPanel circuitPanel;//Panel containing the circuit.
 	
-	
+	private int panelOffX;//Offset for the panel's x-position
+	private int panelOffY;//Offset for the panel's y-position
 	
 	
 	/**
@@ -35,9 +38,22 @@ public class LCLSystem {
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);
 		
+		String osName = System.getProperty("os.name").toLowerCase();		
+		if(osName.contains("linux"))
+		{
+			panelOffX = 50;
+			panelOffY = 50;
+		}
+		else if(osName.contains("mac os"))
+		{
+			panelOffX = 0;
+			panelOffY = 50;
+		}
+		
+		
 		circuitPanel = new LCLPanel();
 		circuitPanel.setSize(1280,720);
-		circuitPanel.setLocation(frame.getX()-50,frame.getY()-50);
+		circuitPanel.setLocation(frame.getX()-panelOffX,frame.getY()-panelOffY);
 		circuitPanel.setVisible(true);//Will create a boolean flag later for this.
 		circuitPanel.setBackground(Color.RED);
 		frame.getContentPane().add(circuitPanel);
