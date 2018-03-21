@@ -1,9 +1,15 @@
 package system;
 
 import java.awt.Graphics;
+import java.awt.Point;
+import java.awt.Rectangle;
 import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import org.w3c.dom.css.Rect;
+
+
 
 
 
@@ -13,8 +19,14 @@ public class LCLSystem {
 	private JFrame frame; //Frame that will contain the circuit panel.
 	private LCLPanel circuitPanel;//Panel containing the circuit.
 	
-	private int panelOffX;//Offset for the panel's x-position
-	private int panelOffY;//Offset for the panel's y-position
+	private Rectangle[] dummyGates;//For testing and simulation.
+	
+	private final int GATEWIDTH = 120;
+	private final int GATEHEIGHT = 80;
+	private final int GATEMIDX = 60;
+	private final int GATEMIDY = 40;
+	
+
 	
 	
 	/**
@@ -37,30 +49,26 @@ public class LCLSystem {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
 		frame.getContentPane().setLayout(null);
-		
-		String osName = System.getProperty("os.name").toLowerCase();		
-		if(osName.contains("linux"))
-		{
-			panelOffX = 50;
-			panelOffY = 50;
-		}
-		else if(osName.contains("mac os"))
-		{
-			panelOffX = 0;
-			panelOffY = 50;
-		}
+
 		
 		
 		circuitPanel = new LCLPanel();
 		circuitPanel.setSize(1280,720);
-		circuitPanel.setLocation(frame.getX()-panelOffX,frame.getY()-panelOffY);
+		circuitPanel.setLocation(circuitPanel.panelOffset(frame));
 		circuitPanel.setVisible(true);//Will create a boolean flag later for this.
 		circuitPanel.setBackground(Color.RED);
+		
+		
+		dummyGates = new Rectangle[10];
+		
+		buildCircuit(dummyGates);
+		
+		circuitPanel.setGates(dummyGates);
+		
 		frame.getContentPane().add(circuitPanel);
 		
 		frame.add(circuitPanel);
-		
-		
+		 
 		
 	}
 	
@@ -70,9 +78,37 @@ public class LCLSystem {
 		while(true)
 		{
 			frame.repaint();
+			try
+			{
+				Thread.sleep(1000);
+			}catch (Exception e) {
+				System.out.println("Error in run() method.");
+			}
 		}
 		
-	} //NOTE: May be changed to have some input arguments.
+	} 
+	
+	/**
+	 * Alpha version of the method, will be later modified for logical gates.
+	 */
+	private void buildCircuit(Rectangle[] gates)
+	{
+		//NOTE: Assumption of only one circuit to build.
+		
+		int startX = 20;//Reference starting x-position of circuit.
+		int startY = 40;//Reference starting y-position of circuit.
+				
+		int offX = GATEWIDTH;//Offset for x-position
+		int offY = GATEMIDY;//Offset for y-position;		
+		
+		for(int i = 0; i < gates.length; i++)
+			gates[i] = new Rectangle(startX+offX*i,startY+offY*i,GATEWIDTH,GATEHEIGHT);		
+		
+	}
+	
+	
+	
+	
 	
 	
 	
@@ -83,11 +119,43 @@ public class LCLSystem {
 	 */
 	private static class LCLPanel extends JPanel
 	{
-		/*public void paint(Graphics g) {
+		private Rectangle[] dummyGates;
+		public void setGates(Rectangle[] gates)
+		{
+			dummyGates = gates;
+		}
+		
+		public void paint(Graphics g) {
 			
 			g.setColor(Color.BLUE);
-			g.drawRect(50, 100, 40, 20);
-		}*/
+			for(Rectangle r : dummyGates)
+				g.drawRect(r.x, r.y, r.width, r.height);
+		}
+		
+		public Point panelOffset(JFrame frame)
+		{
+			String osName = System.getProperty("os.name").toLowerCase();
+			
+			int panelOffX,panelOffY;
+			
+			if(osName.contains("linux"))
+			{
+				panelOffX = 50;
+				panelOffY = 50;
+			}
+			else if(osName.contains("mac os"))
+			{
+				panelOffX = 0;
+				panelOffY = 50;
+			}
+			else
+			{
+				panelOffX = 0;
+				panelOffY = 0;
+			}
+			
+			return new Point(frame.getX()-panelOffX,frame.getY()-panelOffY);
+		}
 		
 	}
 	
