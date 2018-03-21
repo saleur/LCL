@@ -4,8 +4,11 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.Color;
+import java.awt.Dimension;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.w3c.dom.css.Rect;
 
@@ -18,6 +21,7 @@ public class LCLSystem {
 	
 	private JFrame frame; //Frame that will contain the circuit panel.
 	private LCLPanel circuitPanel;//Panel containing the circuit.
+	private JScrollPane scrollCircuit;
 	
 	private Rectangle[] dummyGates;//For testing and simulation.
 	
@@ -48,33 +52,39 @@ public class LCLSystem {
 		frame.setLocation(50,50);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.setVisible(true);
-		frame.getContentPane().setLayout(null);
+		//frame.getContentPane().setLayout(null);
 
 		
 		
 		circuitPanel = new LCLPanel();
-		circuitPanel.setSize(1280,720);
+		
+		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
+	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
+	    
+		circuitPanel.setPreferredSize(cpDimension);//
 		circuitPanel.setLocation(circuitPanel.panelOffset(frame));
 		circuitPanel.setVisible(true);//Will create a boolean flag later for this.
 		circuitPanel.setBackground(Color.RED);
 		
 		
-		dummyGates = new Rectangle[10];
+		dummyGates = new Rectangle[50];
 		
 		buildCircuit(dummyGates);
 		
 		circuitPanel.setGates(dummyGates);
 		
-		frame.getContentPane().add(circuitPanel);
+			
+	    scrollCircuit = new JScrollPane(circuitPanel);//With this line the circuit is now scrollable.	 
 		
-		frame.add(circuitPanel);
+		frame.add(scrollCircuit);
 		 
 		
 	}
 	
 	private void run() {
 		frame.revalidate();
-		circuitPanel.revalidate();
+		
+		//circuitPanel.revalidate();
 		while(true)
 		{
 			frame.repaint();
