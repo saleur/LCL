@@ -12,9 +12,7 @@ public interface LogicalGate {
 	
 	public Point location();	
 	
-	public Color color();
-	
-	public void update();
+	public void updateOutput(boolean[] newInputs);
 	
 	public void draw(Graphics g);
 	
