@@ -14,8 +14,6 @@ import org.w3c.dom.css.Rect;
 
 
 
-
-
 public class LCLSystem {
 	
 	
@@ -25,10 +23,9 @@ public class LCLSystem {
 	
 	private Rectangle[] dummyGates;//For testing and simulation.
 	
-	private final int GATEWIDTH = 120;
-	private final int GATEHEIGHT = 80;
-	private final int GATEMIDX = 60;
-	private final int GATEMIDY = 40;
+	private final int GATEWIDTH = 150;
+	private final int GATEHEIGHT = 100;
+	private final int GATEMIDY = 30;
 	
 
 	
