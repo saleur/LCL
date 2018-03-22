@@ -23,8 +23,8 @@ public class LCLSystem {
 	
 	private Rectangle[] dummyGates;//For testing and simulation.
 	
-	private final int GATEWIDTH = 150;
-	private final int GATEHEIGHT = 100;
+	private final int GATEWIDTH = 250;
+	private final int GATEHEIGHT = 150;
 	private final int GATEMIDY = 30;
 	
 
