@@ -27,6 +27,11 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     	return inputs;
     }
     
+    public Point location()
+    {
+    	return location;
+    }
+    
     public abstract void updateOutput(boolean[] newInputs);
     
     public abstract void draw(Graphics g);
