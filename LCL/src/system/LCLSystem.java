@@ -18,7 +18,7 @@ public class LCLSystem {
 	
 	
 	private JFrame frame; //Frame that will contain the circuit panel.
-	private LCLPanel circuitPanel;//Panel containing the circuit.
+	private LCLCircuit circuit;//Panel containing the circuit.
 	private JScrollPane scrollCircuit;
 	
 	private Rectangle[] dummyGates;//For testing and simulation.
@@ -53,25 +53,25 @@ public class LCLSystem {
 
 		
 		
-		circuitPanel = new LCLPanel();
+		circuit = new LCLCircuit();
 		
 		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
 	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
 	    
-		circuitPanel.setPreferredSize(cpDimension);//
-		circuitPanel.setLocation(circuitPanel.panelOffset(frame));
-		circuitPanel.setVisible(true);//Will create a boolean flag later for this.
-		circuitPanel.setBackground(Color.RED);
+		circuit.setPreferredSize(cpDimension);//
+		circuit.setLocation(circuit.panelOffset(frame));
+		circuit.setVisible(true);//Will create a boolean flag later for this.
+		circuit.setBackground(Color.RED);
 		
 		
 		dummyGates = new Rectangle[50];
 		
 		buildCircuit(dummyGates);
 		
-		circuitPanel.setGates(dummyGates);
+		circuit.setGates(dummyGates);
 		
 			
-	    scrollCircuit = new JScrollPane(circuitPanel);//With this line the circuit is now scrollable.	 
+	    scrollCircuit = new JScrollPane(circuit);//With this line the circuit is now scrollable.	 
 		
 		frame.add(scrollCircuit);
 		 
@@ -119,51 +119,6 @@ public class LCLSystem {
 	
 	
 	
-	/**
-	 * 
-	 * Special class used to draw the logical circuit in a JFrame.
-	 *
-	 */
-	private static class LCLPanel extends JPanel
-	{
-		private Rectangle[] dummyGates;
-		public void setGates(Rectangle[] gates)
-		{
-			dummyGates = gates;
-		}
-		
-		public void paint(Graphics g) {
-			
-			g.setColor(Color.BLUE);
-			for(Rectangle r : dummyGates)
-				g.drawRect(r.x, r.y, r.width, r.height);
-		}
-		
-		public Point panelOffset(JFrame frame)
-		{
-			String osName = System.getProperty("os.name").toLowerCase();
-			
-			int panelOffX,panelOffY;
-			
-			if(osName.contains("linux"))
-			{
-				panelOffX = 50;
-				panelOffY = 50;
-			}
-			else if(osName.contains("mac os"))
-			{
-				panelOffX = 0;
-				panelOffY = 50;
-			}
-			else
-			{
-				panelOffX = 0;
-				panelOffY = 0;
-			}
-			
-			return new Point(frame.getX()-panelOffX,frame.getY()-panelOffY);
-		}
-		
 	}
 	
 	
