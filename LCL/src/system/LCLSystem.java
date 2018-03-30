@@ -68,7 +68,7 @@ public class LCLSystem {
 		
 		buildCircuit(dummyGates);
 		
-		circuit.setGates(dummyGates);
+		circuit.setGates();
 		
 			
 	    scrollCircuit = new JScrollPane(circuit);//With this line the circuit is now scrollable.	 
@@ -119,7 +119,7 @@ public class LCLSystem {
 	
 	
 	
-	}
+	
 	
 	
 	

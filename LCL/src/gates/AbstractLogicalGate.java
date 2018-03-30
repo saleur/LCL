@@ -13,6 +13,11 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     protected boolean output;
     protected BufferedImage gateImg;
     
+    public enum GateType {AND,OR,XOR,NAND,NOR,XNOR}
+    
+   
+    
+    
     public AbstractLogicalGate(boolean[] inputs,Point location,BufferedImage gateImg)
     {
     	this.inputs = inputs;
@@ -35,9 +40,17 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     	return location;
     }
     
+    public GateType getType()
+    {
+    	return gType;
+    }
+    
+    
+    
     public abstract void updateOutput(boolean[] newInputs);
     
     public abstract void draw(Graphics g);
+    
     
     
     
