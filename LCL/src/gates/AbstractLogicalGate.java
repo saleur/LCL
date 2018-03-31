@@ -40,10 +40,7 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     	return location;
     }
     
-    public GateType getType()
-    {
-    	return gType;
-    }
+    
     
     
     
