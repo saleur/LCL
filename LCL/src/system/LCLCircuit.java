@@ -136,6 +136,25 @@ public class LCLCircuit extends JPanel {
 			size++;
 		}
 		
+		public void addComponent(GateType gType,boolean input)
+		{
+			Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
+			LogicalGate newComponent=null;
+			boolean[] inputs  = new boolean[] {components.get(size-1).output(),input};
+			switch(gType)
+			{
+				case AND: 
+					newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[AND]);
+					break;
+				default:
+					System.out.println("Need to implement the rest of the gates");
+					break;
+			}
+			components.add(newComponent);
+			size ++;
+			
+		}
+		
 		public void drawCircuit(Graphics g)
 		{
 			for(LogicalGate gate : components)
