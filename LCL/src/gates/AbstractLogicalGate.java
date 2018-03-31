@@ -38,10 +38,8 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     public Point location()
     {
     	return location;
-    }
-    
-    
-    
+    }  
+      
     
     
     public abstract void updateOutput(boolean[] newInputs);
