@@ -27,10 +27,5 @@ public class ANDGate extends AbstractLogicalGate {
 			output = false;		
 	}
 
-	@Override
-	public void draw(Graphics g) {
-		g.drawImage(gateImg,location.x,location.y,null);
-		 
-	}
 
 }
