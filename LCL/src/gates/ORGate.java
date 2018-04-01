@@ -5,33 +5,29 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+public class ORGate extends AbstractLogicalGate {
 
-public class ANDGate extends AbstractLogicalGate {
-	
-	
-	public ANDGate(boolean[] inputs,Point location,BufferedImage gateImg)
-	{
-		super(inputs,location,gateImg);
-		if(inputs[0] == true && inputs[1] == true)
+	public ORGate(boolean[] inputs, Point location, BufferedImage gateImg) {
+		super(inputs, location, gateImg);
+
+		if(inputs[0] == true || inputs[1] == true)
+			output = true;
+		else
+			output = false;
+	}
+
+	@Override
+	public void updateOutput(boolean[] newInputs) {
+		if(newInputs[0] == true || newInputs[1] == true)
 			output = true;
 		else
 			output = false;
 		
 	}
 
-
-	@Override
-	public void updateOutput(boolean[] newInputs) {
-		if(inputs[0] == true && inputs[1] == true)
-			output = true;
-		else
-			output = false;		
-	}
-
-
 	@Override
 	public void draw(Graphics g) {
-		g.drawImage(gateImg,location.x,location.y,null);
+g.drawImage(gateImg,location.x,location.y,null);
     	
     	String input1, input2;
     	
@@ -53,12 +49,10 @@ public class ANDGate extends AbstractLogicalGate {
     	g.drawString(input2, location.x+40, location.y+90);
     	
     	if(output){
-    		g.drawString("1", location.x+200, location.y+63);
+    		g.drawString("1", location.x+220, location.y+63);
     	}else{
-    		g.drawString("0", location.x+200, location.y+63);
-    	}
-		
+    		g.drawString("0", location.x+220, location.y+63);
+    	}		
 	}
-
 
 }

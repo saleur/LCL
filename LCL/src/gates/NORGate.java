@@ -5,29 +5,23 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 
+public class NORGate  extends AbstractLogicalGate  {
 
-public class ANDGate extends AbstractLogicalGate {
-	
-	
-	public ANDGate(boolean[] inputs,Point location,BufferedImage gateImg)
-	{
-		super(inputs,location,gateImg);
-		if(inputs[0] == true && inputs[1] == true)
+	public NORGate(boolean[] inputs, Point location, BufferedImage gateImg) {
+		super(inputs, location, gateImg);
+		if(inputs[0] == false && inputs[1] == false)
 			output = true;
 		else
 			output = false;
-		
 	}
-
 
 	@Override
 	public void updateOutput(boolean[] newInputs) {
-		if(inputs[0] == true && inputs[1] == true)
+		if(newInputs[0] == false && newInputs[1] == false)
 			output = true;
 		else
 			output = false;		
 	}
-
 
 	@Override
 	public void draw(Graphics g) {
@@ -53,12 +47,11 @@ public class ANDGate extends AbstractLogicalGate {
     	g.drawString(input2, location.x+40, location.y+90);
     	
     	if(output){
-    		g.drawString("1", location.x+200, location.y+63);
+    		g.drawString("1", location.x+230, location.y+63);
     	}else{
-    		g.drawString("0", location.x+200, location.y+63);
+    		g.drawString("0", location.x+230, location.y+63);
     	}
 		
 	}
-
 
 }

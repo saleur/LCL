@@ -59,9 +59,11 @@ public class LCLCircuit extends JPanel {
 
 	public void setGates()
 	{
-		testCircuit.addComponent(GateType.AND, new boolean[] {true,false});
-		testCircuit.addComponent(GateType.AND, new boolean[] {false,true});
-		testCircuit.addComponent(GateType.AND, new boolean[] {false,true});
+		testCircuit.addComponent(GateType.XOR, new boolean[] {false,true});
+		testCircuit.addComponent(GateType.XNOR, new boolean[] {true,false});
+		testCircuit.addComponent(GateType.NOR, new boolean[] {true,true});
+		testCircuit.addComponent(GateType.AND, new boolean[] {false,false});
+
 	}
 	
 	public void paint(Graphics g) {
@@ -126,6 +128,21 @@ public class LCLCircuit extends JPanel {
 				case AND: 
 					newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[AND]);
 					break;
+				case OR:
+					newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[OR]);
+					break;
+				case NAND:
+					newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[NAND]);
+					break;
+				case NOR:
+					newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[NOR]);
+					break;
+				case XNOR:
+					newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[XNOR]);
+					break;
+				case XOR:
+					newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[XOR]);
+					break;
 				default:
 					System.out.println("Need to implement the rest of the gates");
 					break;
@@ -145,6 +162,21 @@ public class LCLCircuit extends JPanel {
 			{
 				case AND: 
 					newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[AND]);
+					break;
+				case OR:
+					newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[OR]);
+					break;
+				case NAND:
+					newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[NAND]);
+					break;
+				case NOR:
+					newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[NOR]);
+					break;
+				case XNOR:
+					newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[XNOR]);
+					break;
+				case XOR:
+					newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[XOR]);
 					break;
 				default:
 					System.out.println("Need to implement the rest of the gates");

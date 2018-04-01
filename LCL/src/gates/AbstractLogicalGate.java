@@ -1,6 +1,7 @@
 package gates;
 
 
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -40,10 +41,8 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     	return location;
     }  
     
-    public void draw(Graphics g)
-    {
-    	g.drawImage(gateImg,location.x,location.y,null);
-    }
+    public abstract void draw(Graphics g);
+    
     
     
     public abstract void updateOutput(boolean[] newInputs);
