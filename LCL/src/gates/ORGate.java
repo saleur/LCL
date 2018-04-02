@@ -27,32 +27,24 @@ public class ORGate extends AbstractLogicalGate {
 
 	@Override
 	public void draw(Graphics g) {
-g.drawImage(gateImg,location.x,location.y,null);
+		g.drawImage(gateImg,location.x,location.y,null);
     	
     	String input1, input2;
+
+    	input1 = (inputs[0]) ? "1" : "0";
     	
-    	if(inputs[0]){
-    		input1 = "1";
-    	}else{
-    		input1 = "0";
-    	}
-    	
-    	if(inputs[1]){
-    		input2 = "1";
-    	}else{
-    		input2 = "0";
-    	}
-    	
+    	input2 = (inputs[1]) ? "1" : "0";
+    	    	
     	g.setColor(Color.BLACK);
     	
     	g.drawString(input1, location.x+40, location.y+30);
     	g.drawString(input2, location.x+40, location.y+90);
     	
-    	if(output){
+    	if(output)
     		g.drawString("1", location.x+220, location.y+63);
-    	}else{
+    	else
     		g.drawString("0", location.x+220, location.y+63);
-    	}		
+    			
 	}
 
 }

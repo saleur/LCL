@@ -59,10 +59,10 @@ public class LCLCircuit extends JPanel {
 
 	public void setGates()
 	{
-		testCircuit.addComponent(GateType.XOR, new boolean[] {false,true});
-		testCircuit.addComponent(GateType.XNOR, new boolean[] {true,false});
-		testCircuit.addComponent(GateType.NOR, new boolean[] {true,true});
-		testCircuit.addComponent(GateType.AND, new boolean[] {false,false});
+		testCircuit.addFirstComponent(GateType.XOR, new boolean[] {false,true});
+		testCircuit.addComponent(GateType.XNOR,false);
+		testCircuit.addComponent(GateType.NOR, true);
+		testCircuit.addComponent(GateType.AND, false);
 
 	}
 	
@@ -119,7 +119,7 @@ public class LCLCircuit extends JPanel {
 			size = 0;
 		}
 		
-		public void addComponent(GateType gType,boolean[] inputs)
+		public void addFirstComponent(GateType gType,boolean[] inputs)
 		{
 			Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
 			LogicalGate newComponent=null;

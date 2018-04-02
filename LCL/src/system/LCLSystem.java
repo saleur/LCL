@@ -21,8 +21,6 @@ public class LCLSystem {
 	private LCLCircuit circuit;//Panel containing the circuit.
 	private JScrollPane scrollCircuit;
 	
-	private Rectangle[] dummyGates;//For testing and simulation.
-	
 	private final int GATEWIDTH = 250;
 	private final int GATEHEIGHT = 150;
 	private final int GATEMIDY = 30;
@@ -64,9 +62,9 @@ public class LCLSystem {
 		circuit.setBackground(Color.RED);
 		
 		
-		dummyGates = new Rectangle[50];
+
 		
-		buildCircuit(dummyGates);
+
 		
 		circuit.setGates();
 		
@@ -95,24 +93,7 @@ public class LCLSystem {
 		
 	} 
 	
-	/**
-	 * Alpha version of the method, will be later modified for logical gates.
-	 */
-	private void buildCircuit(Rectangle[] gates)
-	{
-		//NOTE: Assumption of only one circuit to build.
-		
-		int startX = 20;//Reference starting x-position of circuit.
-		int startY = 40;//Reference starting y-position of circuit.
-				
-		int offX = GATEWIDTH;//Offset for x-position
-		int offY = GATEMIDY;//Offset for y-position;		
-		
-		for(int i = 0; i < gates.length; i++)
-			gates[i] = new Rectangle(startX+offX*i,startY+offY*i,GATEWIDTH,GATEHEIGHT);		
-		
-	}
-	
+
 	
 	
 	
