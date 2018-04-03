@@ -19,12 +19,9 @@ public class LCLSystem {
 	
 	private JFrame frame; //Frame that will contain the circuit panel.
 	private LCLCircuit circuit;//Panel containing the circuit.
-	private JScrollPane scrollCircuit;
+	private JScrollPane scrollableCircuit;//Used to make the circuit scrollable.
 	
-	private final int GATEWIDTH = 250;
-	private final int GATEHEIGHT = 150;
-	private final int GATEMIDY = 30;
-	
+	private CircuitBuilder circuitBuilder;//Used to construct circuits form code.
 
 	
 	
@@ -61,17 +58,17 @@ public class LCLSystem {
 		circuit.setVisible(true);//Will create a boolean flag later for this.
 		circuit.setBackground(Color.RED);
 		
+		circuitBuilder = new CircuitBuilder("testCode.txt");
+		circuitBuilder.buildCircuit();
 		
-
 		
-
 		
-		circuit.setGates();
-		
+		//circuit.setGates();
+		circuit.addCircuits(circuitBuilder.getCircuits());
 			
-	    scrollCircuit = new JScrollPane(circuit);//With this line the circuit is now scrollable.	 
+	    scrollableCircuit = new JScrollPane(circuit);//With this line the circuit is now scrollable.	 
 		
-		frame.add(scrollCircuit);
+		frame.add(scrollableCircuit);
 		 
 		
 	}

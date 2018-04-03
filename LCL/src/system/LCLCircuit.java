@@ -17,17 +17,20 @@ import gates.*;
 public class LCLCircuit extends JPanel {
 	
 	//These constants work as indexes for the gateImages array.
-	private static final int AND = 0;
-	private static final int OR = 1;
-	private static final int XOR = 2;
-	private static final int NAND = 3;
-	private static final int NOR = 4;
-	private static final int XNOR = 5;
+	//NOTE: Might move this to LCLSystem class.
+	protected static final int AND = 0;
+	protected static final int OR = 1;
+	protected static final int XOR = 2;
+	protected static final int NAND = 3;
+	protected static final int NOR = 4;
+	protected static final int XNOR = 5;
 	
     private Circuit testCircuit;
+    
+    private ArrayList<Circuit> circuits;
 	
 	
-	private static BufferedImage[] gateImages;
+	protected static BufferedImage[] gateImages;//NOTE: Might move this to LCL System class.
 	
 	private Rectangle[] dummyGates;
 	
@@ -51,9 +54,14 @@ public class LCLCircuit extends JPanel {
 			System.out.println("Look at LCLCircuit Contructor for debugging");			
 		};
 		
-		testCircuit = new Circuit(20,40);
+		
 		
 	
+	}
+	
+	public void addCircuits(ArrayList<Circuit> circuits)
+	{
+		this.circuits = circuits;
 	}
 	
 
@@ -72,7 +80,10 @@ public class LCLCircuit extends JPanel {
 		//for(Rectangle r : dummyGates)
 			//g.drawRect(r.x, r.y, r.width, r.height);
 		
-		testCircuit.drawCircuit(g);
+		//testCircuit.drawCircuit(g);
+		
+		for(Circuit c : circuits)
+			c.drawCircuit(g);
 	}
 	
 	public Point panelOffset(JFrame frame)
@@ -101,99 +112,6 @@ public class LCLCircuit extends JPanel {
 	}
 	
 	
-	private static class Circuit {
-		
-		private ArrayList<LogicalGate> components;
-		private int size;
-		private int startXPos;
-		private int startYPos;
-		private final int OFFX = 250;
-		private final int OFFY = 33;
-		
-		
-		public Circuit(int startXPos,int startYPos)
-		{
-			this.startXPos = startXPos;
-			this.startYPos = startYPos;
-			components = new ArrayList<>();
-			size = 0;
-		}
-		
-		public void addFirstComponent(GateType gType,boolean[] inputs)
-		{
-			Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
-			LogicalGate newComponent=null;
-			switch(gType)
-			{
-				case AND: 
-					newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[AND]);
-					break;
-				case OR:
-					newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[OR]);
-					break;
-				case NAND:
-					newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[NAND]);
-					break;
-				case NOR:
-					newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[NOR]);
-					break;
-				case XNOR:
-					newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[XNOR]);
-					break;
-				case XOR:
-					newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[XOR]);
-					break;
-				default:
-					System.out.println("Need to implement the rest of the gates");
-					break;
-			}
-			
-			components.add(newComponent);
-			
-			size++;
-		}
-		
-		public void addComponent(GateType gType,boolean input)
-		{
-			Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
-			LogicalGate newComponent=null;
-			boolean[] inputs  = new boolean[] {components.get(size-1).output(),input};
-			switch(gType)
-			{
-				case AND: 
-					newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[AND]);
-					break;
-				case OR:
-					newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[OR]);
-					break;
-				case NAND:
-					newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[NAND]);
-					break;
-				case NOR:
-					newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[NOR]);
-					break;
-				case XNOR:
-					newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[XNOR]);
-					break;
-				case XOR:
-					newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[XOR]);
-					break;
-				default:
-					System.out.println("Need to implement the rest of the gates");
-					break;
-			}
-			components.add(newComponent);
-			size ++;
-			
-		}
-		
-		public void drawCircuit(Graphics g)
-		{
-			for(LogicalGate gate : components)
-				gate.draw(g);
-		}
-		
-	    
-	}
+	
 	
 }
