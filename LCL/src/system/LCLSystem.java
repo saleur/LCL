@@ -12,6 +12,8 @@ import javax.swing.JScrollPane;
 
 import org.w3c.dom.css.Rect;
 
+import componentsImages.Gates;
+
 
 
 public class LCLSystem {
@@ -22,6 +24,8 @@ public class LCLSystem {
 	private JScrollPane scrollableCircuit;//Used to make the circuit scrollable.
 	
 	private CircuitBuilder circuitBuilder;//Used to construct circuits form code.
+	
+	private Gates gates;
 
 	
 	
@@ -52,6 +56,9 @@ public class LCLSystem {
 		
 		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
 	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
+	    
+	    gates = new Gates();
+	    
 	    
 		circuit.setPreferredSize(cpDimension);//
 		circuit.setLocation(circuit.panelOffset(frame));

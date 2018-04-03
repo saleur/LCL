@@ -149,8 +149,10 @@ public class CircuitBuilder {
 		
 		//System.out.println("Finished first while loop");
 		componentInputs[1] = inputs.get(operations.charAt(i));
-		//System.out.println("Good at line 147");
+		//System.out.println("Good at line 147 ");
+		//System.out.println("operator = "+ operator + " inputs = " + componentInputs[0] + " " + componentInputs[1]);
 		newCircuit.addFirstComponent(operators.get(operator), componentInputs);
+		
 		//System.out.println("Good at line 149");
 		operator = "";
 		i++;

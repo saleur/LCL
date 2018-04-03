@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
 
+import componentsImages.Gates;
 import gates.ANDGate;
 import gates.LogicalGate;
 import gates.NANDGate;
@@ -38,25 +39,25 @@ public class Circuit {
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[LCLCircuit.AND]);
+				newComponent = new ANDGate(inputs, location, Gates.GateImgs[Gates.AND]);
 				break;
 			case OR:
-				newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.OR]);
+				newComponent = new ORGate(inputs,location, Gates.GateImgs[Gates.OR]);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.NAND]);
+				newComponent = new NANDGate(inputs,location, Gates.GateImgs[Gates.NAND]);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.NOR]);
+				newComponent = new NORGate(inputs,location, Gates.GateImgs[Gates.NOR]);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.XNOR]);
+				newComponent = new XNORGate(inputs,location, Gates.GateImgs[Gates.XNOR]);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.XOR]);
+				newComponent = new XORGate(inputs,location, Gates.GateImgs[Gates.XOR]);
 				break;
 			default:
-				System.out.println("Need to implement the rest of the gates");
+				System.out.println("Invalid gType given");
 				break;
 		}
 		
@@ -73,25 +74,25 @@ public class Circuit {
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputs, location, LCLCircuit.gateImages[LCLCircuit.AND]);
+				newComponent = new ANDGate(inputs, location, Gates.GateImgs[Gates.AND]);
 				break;
 			case OR:
-				newComponent = new ORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.OR]);
+				newComponent = new ORGate(inputs,location, Gates.GateImgs[Gates.OR]);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.NAND]);
+				newComponent = new NANDGate(inputs,location, Gates.GateImgs[Gates.NAND]);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.NOR]);
+				newComponent = new NORGate(inputs,location, Gates.GateImgs[Gates.NOR]);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.XNOR]);
+				newComponent = new XNORGate(inputs,location, Gates.GateImgs[Gates.XNOR]);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputs,location, LCLCircuit.gateImages[LCLCircuit.XOR]);
+				newComponent = new XORGate(inputs,location, Gates.GateImgs[Gates.XOR]);
 				break;
 			default:
-				System.out.println("Need to implement the rest of the gates");
+				System.out.println("Invalid gType given");
 				break;
 		}
 		components.add(newComponent);
