@@ -176,7 +176,7 @@ public class CircuitBuilder {
 		
 		
 		numOfCircuits++;
-		circuitYPos *= 6;
+		circuitYPos +=200;
 	}
 	
 	private void mapOperators()
