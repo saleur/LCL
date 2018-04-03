@@ -1,0 +1,9 @@
+inputs:
+A=1
+B=0
+C=1
+D=0
+E=1
+circuit:
+F=AandBorCxorD
+G=BandDnorC
