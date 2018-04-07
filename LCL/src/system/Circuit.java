@@ -3,6 +3,7 @@ package system;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import componentsImages.Gates;
 import gates.ANDGate;
@@ -105,5 +106,20 @@ public class Circuit {
 	{
 		for(LogicalGate gate : components)
 			gate.draw(g);
+	}
+	
+	public void updateInputs(HashMap<Character,Boolean> inputs) {
+		
+		for(Character c : inputs.keySet())
+		{
+			for(int i = 0; i < size;i++)
+				components.get(i).updateInputs(c, inputs.get(c));
+		}
+	}
+	
+	public void updateOutputs()
+	{
+		for(int i = 0; i < size; i++)
+			components.get(i).updateOutput();//May move this line inside the first for loop in updateInputs method.
 	}
 }
