@@ -6,13 +6,13 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-public class LCLCircuit extends JPanel {
+public class LCLCircuitPanel extends JPanel {
 	
 	    
     private ArrayList<Circuit> circuits;
 	
 	
-	public LCLCircuit()
+	public LCLCircuitPanel()
 	{
 		super();
 		circuits = null;

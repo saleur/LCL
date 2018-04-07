@@ -15,7 +15,9 @@ public interface LogicalGate {
 	
 	public Point location();	
 	
-	public void updateOutput(boolean[] newInputs);
+	public void updateInputs(char inputName, boolean inputValue);
+			
+	public void updateOutput();
 	
 	public void draw(Graphics g);
 	

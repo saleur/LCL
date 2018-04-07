@@ -20,7 +20,7 @@ public class LCLSystem {
 	
 	
 	private JFrame frame; //Frame that will contain the circuit panel.
-	private LCLCircuit circuit;//Panel containing the circuit.
+	private LCLCircuitPanel circuit;//Panel containing the circuit.
 	private JScrollPane scrollableCircuit;//Used to make the circuit scrollable.
 	
 	private CircuitBuilder circuitBuilder;//Used to construct circuits form code.
@@ -52,7 +52,7 @@ public class LCLSystem {
 
 		
 		
-		circuit = new LCLCircuit();
+		circuit = new LCLCircuitPanel();
 		
 		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
 	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.

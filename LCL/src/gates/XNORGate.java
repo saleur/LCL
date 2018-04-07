@@ -7,10 +7,10 @@ import java.awt.image.BufferedImage;
 
 public class XNORGate extends AbstractLogicalGate {
 	
-	public XNORGate(boolean[] inputs, Point location, BufferedImage gateImg) {
+	public XNORGate(char[] inputNames,boolean[] inputValues, Point location, BufferedImage gateImg) {
 
-		super(inputs, location, gateImg);
-		if((inputs[0] == false && inputs[1] == false) || (inputs[0] == true && inputs[1] == true))
+		super(inputNames,inputValues, location, gateImg);
+		if((inputValues[0] == false && inputValues[1] == false) || (inputValues[0] == true && inputValues[1] == true))
 			output = true;
 		else
 			output = false;
@@ -19,8 +19,8 @@ public class XNORGate extends AbstractLogicalGate {
 
 
 @Override
-public void updateOutput(boolean[] newInputs) {
-	if((newInputs[0] == false && newInputs[1] == false) || (newInputs[0] == true && newInputs[1] == true))
+public void updateOutput() {
+	if((inputValues[0] == false && inputValues[1] == false) || (inputValues[0] == true && inputValues[1] == true))
 		output = true;
 	else
 		output = false;	
@@ -34,9 +34,9 @@ public void draw(Graphics g) {
 	
 	String input1, input2;	
 
-	input1 = (inputs[0]) ? "1" : "0";
+	input1 = (inputValues[0]) ? "1" : "0";
 	
-	input2 = (inputs[1]) ? "1" : "0";
+	input2 = (inputValues[1]) ? "1" : "0";
 	
 	g.setColor(Color.BLACK);
 	

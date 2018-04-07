@@ -130,9 +130,11 @@ public class CircuitBuilder {
 		Circuit newCircuit = new Circuit(circuitXPos, circuitYPos);
 		
 		String operations  = circuitDeclaration.substring(3);
-		boolean[] componentInputs = new boolean[2];
+		char[] componentInputNames = new char[2];
+		boolean[] componentInputValues = new boolean[2];
 		
-		componentInputs[0]= inputs.get(circuitDeclaration.charAt(2));
+		componentInputNames[0] = circuitDeclaration.charAt(2);
+		componentInputValues[0]= inputs.get(circuitDeclaration.charAt(2));
 		
 		String operator = "";
 		
@@ -148,15 +150,17 @@ public class CircuitBuilder {
 		}
 		
 		//System.out.println("Finished first while loop");
-		componentInputs[1] = inputs.get(operations.charAt(i));
+		componentInputNames[1] = operations.charAt(i);
+		componentInputValues[1] = inputs.get(operations.charAt(i));
 		//System.out.println("Good at line 147 ");
 		//System.out.println("operator = "+ operator + " inputs = " + componentInputs[0] + " " + componentInputs[1]);
-		newCircuit.addFirstComponent(operators.get(operator), componentInputs);
+		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues);
 		
 		//System.out.println("Good at line 149");
 		operator = "";
 		i++;
-		boolean tempInput;
+		
+		boolean tempInputValue;
 		while(i<operations.length())
 		{
 			char c = operations.charAt(i);
@@ -164,8 +168,8 @@ public class CircuitBuilder {
 				operator += c;
 			else
 			{
-				tempInput = inputs.get(c);
-				newCircuit.addComponent(operators.get(operator), tempInput);
+				tempInputValue = inputs.get(c);
+				newCircuit.addComponent(operators.get(operator),c,tempInputValue);
 				operator = "";
 			}
 			

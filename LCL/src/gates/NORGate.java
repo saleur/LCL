@@ -7,17 +7,17 @@ import java.awt.image.BufferedImage;
 
 public class NORGate  extends AbstractLogicalGate  {
 
-	public NORGate(boolean[] inputs, Point location, BufferedImage gateImg) {
-		super(inputs, location, gateImg);
-		if(inputs[0] == false && inputs[1] == false)
+	public NORGate(char[] inputNames,boolean[] inputValues, Point location, BufferedImage gateImg) {
+		super(inputNames,inputValues, location, gateImg);
+		if(inputValues[0] == false && inputValues[1] == false)
 			output = true;
 		else
 			output = false;
 	}
 
 	@Override
-	public void updateOutput(boolean[] newInputs) {
-		if(newInputs[0] == false && newInputs[1] == false)
+	public void updateOutput() {
+		if(inputValues[0] == false && inputValues[1] == false)
 			output = true;
 		else
 			output = false;		
@@ -29,9 +29,9 @@ public class NORGate  extends AbstractLogicalGate  {
     	
     	String input1, input2;
 
-    	input1 = (inputs[0]) ? "1" : "0";
+    	input1 = (inputValues[0]) ? "1" : "0";
     	
-    	input2 = (inputs[1]) ? "1" : "0";
+    	input2 = (inputValues[1]) ? "1" : "0";
     	    	
     	g.setColor(Color.BLACK);
     	

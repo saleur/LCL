@@ -7,17 +7,17 @@ import java.awt.image.BufferedImage;
 
 public class NANDGate extends AbstractLogicalGate {
 
-	public NANDGate(boolean[] inputs, Point location, BufferedImage gateImg) {
-		super(inputs, location, gateImg);
-		if(!(inputs[0] == true && inputs[1] == true))
+	public NANDGate(char[] inputNames,boolean[] inputValues,Point location, BufferedImage gateImg) {
+		super(inputNames,inputValues,location, gateImg);
+		if(!(inputValues[0] == true && inputValues[1] == true))
 			output = true;
 		else
 			output = false;
 	}
 
 	@Override
-	public void updateOutput(boolean[] newInputs) {
-		if(!(newInputs[0] == true && newInputs[1] == true))
+	public void updateOutput() {
+		if(!(inputValues[0] == true && inputValues[1] == true))
 			output = true;
 		else
 			output = false;		
@@ -29,9 +29,9 @@ public class NANDGate extends AbstractLogicalGate {
 	    	
 	    	String input1, input2;	    	
 
-	    	input1 = (inputs[0]) ? "1" : "0";
+	    	input1 = (inputValues[0]) ? "1" : "0";
 	    	
-	    	input2 = (inputs[1]) ? "1" : "0";
+	    	input2 = (inputValues[1]) ? "1" : "0";
 	    	
 	    	g.setColor(Color.BLACK);
 	    	
@@ -41,10 +41,7 @@ public class NANDGate extends AbstractLogicalGate {
 	    	if(output)
 	    		g.drawString("1", location.x+220, location.y+63);
 	    	else
-	    		g.drawString("0", location.x+220, location.y+63);
-	    	
-	    	
-	    	
+	    		g.drawString("0", location.x+220, location.y+63);	
 	    
 		
 	}

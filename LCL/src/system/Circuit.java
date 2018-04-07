@@ -32,29 +32,29 @@ public class Circuit {
 		size = 0;
 	}
 	
-	public void addFirstComponent(GateType gType,boolean[] inputs)
+	public void addFirstComponent(GateType gType,char[] inputNames,boolean[] inputValues)
 	{
 		Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
 		LogicalGate newComponent=null;
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputs, location, Gates.GateImgs[Gates.AND]);
+				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND]);
 				break;
 			case OR:
-				newComponent = new ORGate(inputs,location, Gates.GateImgs[Gates.OR]);
+				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR]);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputs,location, Gates.GateImgs[Gates.NAND]);
+				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND]);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputs,location, Gates.GateImgs[Gates.NOR]);
+				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR]);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputs,location, Gates.GateImgs[Gates.XNOR]);
+				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR]);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputs,location, Gates.GateImgs[Gates.XOR]);
+				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR]);
 				break;
 			default:
 				System.out.println("Invalid gType given");
@@ -66,30 +66,31 @@ public class Circuit {
 		size++;
 	}
 	
-	public void addComponent(GateType gType,boolean input)
+	public void addComponent(GateType gType,char inputName,boolean inputValue)
 	{
 		Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
 		LogicalGate newComponent=null;
-		boolean[] inputs  = new boolean[] {components.get(size-1).output(),input};
+		char[] inputNames = new char[] {'O',inputName};//NOTE: Placing 'O' as place holder this needs to be changed later.
+		boolean[] inputValues  = new boolean[] {components.get(size-1).output(),inputValue};
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputs, location, Gates.GateImgs[Gates.AND]);
+				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND]);
 				break;
 			case OR:
-				newComponent = new ORGate(inputs,location, Gates.GateImgs[Gates.OR]);
+				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR]);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputs,location, Gates.GateImgs[Gates.NAND]);
+				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND]);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputs,location, Gates.GateImgs[Gates.NOR]);
+				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR]);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputs,location, Gates.GateImgs[Gates.XNOR]);
+				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR]);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputs,location, Gates.GateImgs[Gates.XOR]);
+				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR]);
 				break;
 			default:
 				System.out.println("Invalid gType given");
