@@ -1,2 +1,2 @@
-D = ((A or B) and C)
-E = (A and D)
+A = (B or C)
+D = (A and C)

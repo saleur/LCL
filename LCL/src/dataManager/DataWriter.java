@@ -9,20 +9,22 @@ import java.io.PrintWriter;
 
 
 public class DataWriter {
-	private static File fout = null;
+	private static File logicFout = null;
+	private static File inputFout = null;
 	private static BufferedWriter bw = null;
 	
 	//Constructor
 	public DataWriter(){
-		fout = new File("LogicInput.txt"); 
+		logicFout = new File("LogicInput.txt"); 
+		inputFout = new File("InputValues.txt"); 
 	}
 	
-	//Method to write the input file
-	public void writeToFile(String text, boolean append) {
+	//Method to write the Logic Input file
+	public void writeToLogicFile(String text, boolean append) {
 
 		try {
 			
-			FileWriter fw = new FileWriter(fout, append);
+			FileWriter fw = new FileWriter(logicFout, append);
 			bw = new BufferedWriter(fw);
 			PrintWriter out = new PrintWriter(bw);
 			out.println(text);
@@ -34,4 +36,22 @@ public class DataWriter {
 			
 	}
 }	
+	
+	//Method to write the Input Values file
+		public void writeToInputValuesFile(String text, boolean append) {
+
+			try {
+				
+				FileWriter fw = new FileWriter(inputFout, append);
+				bw = new BufferedWriter(fw);
+				PrintWriter out = new PrintWriter(bw);
+				out.println(text);
+				out.close();
+
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				System.out.print(e);
+				
+		}
+	}
 }

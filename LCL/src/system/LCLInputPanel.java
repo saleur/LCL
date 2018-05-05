@@ -39,61 +39,71 @@ public class LCLInputPanel extends JPanel {
 		
 		JLabel lblInputs = new JLabel("Inputs");
 		lblInputs.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblInputs.setBounds(70, 42, 49, 16);
+		lblInputs.setBounds(100, 42, 49, 16);
 		add(lblInputs);
 		
-		textField = new JTextField();
-		textField.setBounds(16, 69, 70, 26);
-		add(textField);
-		textField.setColumns(10);
+//		textField = new JTextField();
+//		textField.setBounds(16, 69, 70, 26);
+//		add(textField);
+//		textField.setColumns(10);
+//		
+//		value_1 = new JTextField();
+//		value_1.setColumns(10);
+//		value_1.setBounds(109, 69, 70, 26);
+//		add(value_1);
+//		
+//		textField_2 = new JTextField();
+//		textField_2.setColumns(10);
+//		textField_2.setBounds(16, 108, 70, 26);
+//		add(textField_2);
+//		
+//		textField_3 = new JTextField();
+//		textField_3.setColumns(10);
+//		textField_3.setBounds(16, 150, 70, 26);
+//		add(textField_3);
+//		
+//		textField_4 = new JTextField();
+//		textField_4.setColumns(10);
+//		textField_4.setBounds(16, 188, 70, 26);
+//		add(textField_4);
+//		
+//		value_2 = new JTextField();
+//		value_2.setColumns(10);
+//		value_2.setBounds(109, 108, 70, 26);
+//		add(value_2);
+//		
+//		value_3 = new JTextField();
+//		value_3.setColumns(10);
+//		value_3.setBounds(109, 150, 70, 26);
+//		add(value_3);
+//		
+//		value_4 = new JTextField();
+//		value_4.setColumns(10);
+//		value_4.setBounds(109, 188, 70, 26);
+//		add(value_4);
 		
-		value_1 = new JTextField();
-		value_1.setColumns(10);
-		value_1.setBounds(109, 69, 70, 26);
-		add(value_1);
-		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
-		textField_2.setBounds(16, 108, 70, 26);
-		add(textField_2);
-		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
-		textField_3.setBounds(16, 150, 70, 26);
-		add(textField_3);
-		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
-		textField_4.setBounds(16, 188, 70, 26);
-		add(textField_4);
-		
-		value_2 = new JTextField();
-		value_2.setColumns(10);
-		value_2.setBounds(109, 108, 70, 26);
-		add(value_2);
-		
-		value_3 = new JTextField();
-		value_3.setColumns(10);
-		value_3.setBounds(109, 150, 70, 26);
-		add(value_3);
-		
-		value_4 = new JTextField();
-		value_4.setColumns(10);
-		value_4.setBounds(109, 188, 70, 26);
-		add(value_4);
-		
-		JLabel lblCiruitLogic = new JLabel("Ciruit Logic");
+		JLabel lblCiruitLogic = new JLabel("Circuit Logic");
 		lblCiruitLogic.setFont(new Font("Lucida Grande", Font.PLAIN, 16));
-		lblCiruitLogic.setBounds(295, 42, 96, 16);
+		lblCiruitLogic.setBounds(327, 42, 99, 16);
 		add(lblCiruitLogic);
 		
-		JTextPane LogicInputPane = new JTextPane();
-		LogicInputPane.setBounds(215, 67, 258, 192);
-		add(LogicInputPane);
+		JTextPane logicInputPane = new JTextPane();
+		logicInputPane.setBounds(258, 70, 236, 192);
+		add(logicInputPane);
+		
+		//Example input
+		logicInputPane.setText("A = (B || C)\nD = (A & C)");
 		
 		JButton btnRun = new JButton("Run");
-		btnRun.setBounds(170, 418, 117, 29);
+		btnRun.setBounds(191, 417, 117, 29);
 		add(btnRun);
+		
+		JTextPane inputsValuePane = new JTextPane();
+		inputsValuePane.setBounds(6, 70, 236, 192);
+		add(inputsValuePane);
+		
+		//Example input
+		inputsValuePane.setText("B = 0\nC = 1");
 		
 
 		btnRun.addActionListener( new ActionListener()
@@ -104,11 +114,17 @@ public class LCLInputPanel extends JPanel {
 		    	//We still have to check inputs fields are filled
 		    	
 		    	//Traduces &'s and ||'s to "and" & "or"
-		    	String text = LogicInputPane.getText().replace("||", "or").replace("&", "and");
-		        System.out.println(text);
+		    	String logic = logicInputPane.getText().replace("||", "or").replace("&", "and");
+		        System.out.println(logic);
 		        
-		        //Writes the input file
-		        writer.writeToFile(text, false);
+		        //Writes the logic file
+		        writer.writeToLogicFile(logic, false);
+		        
+		        //Writes the inputs Value file
+		        writer.writeToInputValuesFile(inputsValuePane.getText(), false);
+		        
+		        
+		        
 		       
 		    }
 		});
@@ -141,9 +157,4 @@ public class LCLInputPanel extends JPanel {
 		
 		return new Point(frame.getX()-panelOffX,frame.getY()-panelOffY);
 	}
-	
-
-
-
-	
 }
