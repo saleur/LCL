@@ -23,8 +23,10 @@ public class LCLSystem {
 	private LCLCircuitPanel circuit;//Panel containing the circuit.
 	private JScrollPane scrollableCircuit;//Used to make the circuit scrollable.
 	
+	//inputs
+	private JFrame inputFrame; //Frame that will contain the input panel.
+	private LCLInputPanel inputs;
 	private CircuitBuilder circuitBuilder;//Used to construct circuits form code.
-	
 	private Gates gates;
 
 	
@@ -37,8 +39,27 @@ public class LCLSystem {
 	{
 		//NOTE: "args" needs to be used appropriately in the future.
 		LCLSystem sys = new LCLSystem();
-		sys.setup();
-		sys.run();
+		
+		sys.inputSetup();
+		sys.inputRun();
+	//	sys.setup();
+	//	sys.run();
+	}
+	
+	private void inputSetup()
+	{
+		inputFrame = new JFrame("LCL Inputs");
+		inputFrame.setSize(500,500);
+		inputFrame.setLocation(50,50);
+		inputFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		inputFrame.setVisible(true);
+		
+		inputs = new LCLInputPanel();
+		
+	    inputs.setVisible(true);//Will create a boolean flag later for this.
+	    inputFrame.add(inputs);
+
+	    
 	}
 	
 	private void setup()
@@ -77,6 +98,22 @@ public class LCLSystem {
 		
 		frame.add(scrollableCircuit);
 		 
+		
+	}
+	
+	private void inputRun() {
+		inputFrame.revalidate();
+		
+		while(true)
+		{
+			inputFrame.repaint();
+			try
+			{
+				Thread.sleep(1000);
+			}catch (Exception e) {
+				System.out.println("Error in run() method.");
+			}
+		}
 		
 	}
 	

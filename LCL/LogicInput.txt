@@ -1,0 +1,2 @@
+D = ((A or B) and C)
+E = (A and D)
