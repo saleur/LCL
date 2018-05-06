@@ -9,7 +9,7 @@ import ply.yacc as yacc
 # -----------------------------------------------------------------------------
 
 tokens = (
-    'NAME','TRUE','FALSE',
+    'NAME','VALUE',
     'AND','OR','XOR','NAND','NOR','XNOR','EQUALS',
     'LPAREN','RPAREN',
     )
@@ -67,17 +67,13 @@ def t_XNOR(t):
     return t   
    
 
-def t_TRUE(t):
-    r'1'
-    if t == '1':
+def t_VALUE(t):
+    r'1|0'
+    if t.value == '1':
         t.value = 'true'
-    return t
-
-def t_FALSE(t):
-    r'0'
-    if t == '0':
+    elif t.value == '0':
         t.value = 'false'
-    return t
+    return t   
 
 # Build the lexer
 lexer = lex.lex()
