@@ -20,17 +20,6 @@ t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
 t_NAME    = r'[a-zA-Z_]'
 
-# Ignored characters
-t_ignore = " \t \n"
-
-#def t_newline(t):
-#   r'\n+'
-#   t.lexer.lineno += t.value.count("\n")
-
-def t_error(t):
-    print("Illegal character '%s'" % t.value[0])
-    t.lexer.skip(1)
-
 def t_AND(t):
     r'and'
     t.value = 'and'
@@ -65,23 +54,29 @@ def t_XNOR(t):
 def t_VALUE(t):
     r'1|0'
     if t.value == '1':
-        t.value = 'true'
+        t.value = True
     elif t.value == '0':
-        t.value = 'false'
-    return t   
+        t.value = False
+    return t 
+
+t_ignore = " \t\n"
+
+
+def t_error(t):
+    print("Illegal character '%s'" % t.value[0])
+    t.lexer.skip(1)
 
 # Build the lexer
 lexer = lex.lex()
 
 try:
-  LCLSourceFile = open("testCode.txt", 'r')
+  LCLSourceFile = open("tCode.txt", 'r')
 except IOError:
    print("Error opening file")
    exit()
 
 sourceFile = LCLSourceFile.read()
 lexer.input(sourceFile)
-
 # Tokenize
 while True:
      tok = lexer.token()
