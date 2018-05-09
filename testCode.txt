@@ -3,5 +3,5 @@ B=0
 C=1
 D=0
 E=1
-F=AandBorCxorD
-G=BandDnorC
+F=(AandB)or(CxorD)
+G=(BandD)norC
