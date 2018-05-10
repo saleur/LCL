@@ -11,15 +11,23 @@ import ply.yacc as yacc
 tokens = (
     'NAME','VALUE',
     'AND','OR','XOR','NAND','NOR','XNOR','EQUALS',
-    'LPAREN','RPAREN',
+    'LPAREN','RPAREN'
     )
 
 # Tokens
 t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_NAME    = r'[a-zA-Z_]'
 
+
+def t_NAME(t):
+    r'[A-Z_]'
+    if len(t.value)==1:
+        return t
+    else: 
+        return ValueError
+    
+    
 def t_AND(t):
     r'and'
     t.value = 'and'

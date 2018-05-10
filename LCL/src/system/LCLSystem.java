@@ -78,7 +78,7 @@ public class LCLSystem {
 		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
 	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
 	    
-	    gates = new Gates();
+	    gates = new Gates();//Initializes the Gate Images
 	    
 	    
 		circuit.setPreferredSize(cpDimension);//

@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'AND EQUALS LPAREN NAME NAND NOR OR RPAREN VALUE XNOR XORcircuit : NAME EQUALS inputcircuit : inputinput : input AND input\n               | input OR input\n               | input XOR input\n               | input NAND input\n               | input NOR  input\n               | input XNOR inputinput : LPAREN input RPARENinput : VALUEinput : NAME'
+_lr_signature = 'AND EQUALS LPAREN NAME NAND NOR OR RPAREN VALUE XNOR XORcircuit : NAME EQUALS inputinput : input AND input\n               | input OR input\n               | input XOR input\n               | input NAND input\n               | input NOR  input\n               | input XNOR inputinput : LPAREN input RPARENinput : VALUEinput : NAME'
     
-_lr_action_items = {'AND':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,9,-11,9,9,-9,9,9,9,9,9,9,]),'XNOR':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,10,-11,10,10,-9,10,10,10,10,10,10,]),'XOR':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,11,-11,11,11,-9,11,11,11,11,11,11,]),'NAME':([0,4,6,9,10,11,12,13,14,],[1,7,7,7,7,7,7,7,7,]),'NAND':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,12,-11,12,12,-9,12,12,12,12,12,12,]),'VALUE':([0,4,6,9,10,11,12,13,14,],[2,2,2,2,2,2,2,2,2,]),'EQUALS':([1,],[6,]),'LPAREN':([0,4,6,9,10,11,12,13,14,],[4,4,4,4,4,4,4,4,4,]),'RPAREN':([2,7,8,16,17,18,19,20,21,22,],[-10,-11,16,-9,-3,-8,-5,-6,-4,-7,]),'OR':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,13,-11,13,13,-9,13,13,13,13,13,13,]),'NOR':([1,2,5,7,8,15,16,17,18,19,20,21,22,],[-11,-10,14,-11,14,14,-9,14,14,14,14,14,14,]),'$end':([1,2,3,5,7,15,16,17,18,19,20,21,22,],[-11,-10,0,-2,-11,-1,-9,-3,-8,-5,-6,-4,-7,]),}
+_lr_action_items = {'AND':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,9,9,-8,9,9,9,9,9,9,]),'XNOR':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,10,10,-8,10,10,10,10,10,10,]),'XOR':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,11,11,-8,11,11,11,11,11,11,]),'NAME':([0,3,6,9,10,11,12,13,14,],[1,4,4,4,4,4,4,4,4,]),'EQUALS':([1,],[3,]),'VALUE':([3,6,9,10,11,12,13,14,],[5,5,5,5,5,5,5,5,]),'NAND':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,12,12,-8,12,12,12,12,12,12,]),'LPAREN':([3,6,9,10,11,12,13,14,],[6,6,6,6,6,6,6,6,]),'RPAREN':([4,5,8,15,16,17,18,19,20,21,],[-10,-9,15,-8,-2,-7,-4,-5,-3,-6,]),'OR':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,13,13,-8,13,13,13,13,13,13,]),'NOR':([4,5,7,8,15,16,17,18,19,20,21,],[-10,-9,14,14,-8,14,14,14,14,14,14,]),'$end':([2,4,5,7,15,16,17,18,19,20,21,],[0,-10,-9,-1,-8,-2,-7,-4,-5,-3,-6,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -17,7 +17,7 @@ for _k, _v in _lr_action_items.items():
       _lr_action[_x][_k] = _y
 del _lr_action_items
 
-_lr_goto_items = {'input':([0,4,6,9,10,11,12,13,14,],[5,8,15,17,18,19,20,21,22,]),'circuit':([0,],[3,]),}
+_lr_goto_items = {'input':([3,6,9,10,11,12,13,14,],[7,8,16,17,18,19,20,21,]),'circuit':([0,],[2,]),}
 
 _lr_goto = {}
 for _k, _v in _lr_goto_items.items():
@@ -27,15 +27,14 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> circuit","S'",1,None,None,None),
-  ('circuit -> NAME EQUALS input','circuit',3,'p_circuit_assign','lcl_parser.py',8),
-  ('circuit -> input','circuit',1,'p_circuit_input','lcl_parser.py',12),
-  ('input -> input AND input','input',3,'p_input_operation','lcl_parser.py',16),
-  ('input -> input OR input','input',3,'p_input_operation','lcl_parser.py',17),
-  ('input -> input XOR input','input',3,'p_input_operation','lcl_parser.py',18),
-  ('input -> input NAND input','input',3,'p_input_operation','lcl_parser.py',19),
-  ('input -> input NOR input','input',3,'p_input_operation','lcl_parser.py',20),
-  ('input -> input XNOR input','input',3,'p_input_operation','lcl_parser.py',21),
-  ('input -> LPAREN input RPAREN','input',3,'p_input_factor','lcl_parser.py',31),
-  ('input -> VALUE','input',1,'p_input_number','lcl_parser.py',35),
-  ('input -> NAME','input',1,'p_input_name','lcl_parser.py',39),
+  ('circuit -> NAME EQUALS input','circuit',3,'p_circuit_assign','lcl_parser.py',10),
+  ('input -> input AND input','input',3,'p_input_operation','lcl_parser.py',21),
+  ('input -> input OR input','input',3,'p_input_operation','lcl_parser.py',22),
+  ('input -> input XOR input','input',3,'p_input_operation','lcl_parser.py',23),
+  ('input -> input NAND input','input',3,'p_input_operation','lcl_parser.py',24),
+  ('input -> input NOR input','input',3,'p_input_operation','lcl_parser.py',25),
+  ('input -> input XNOR input','input',3,'p_input_operation','lcl_parser.py',26),
+  ('input -> LPAREN input RPAREN','input',3,'p_input_factor','lcl_parser.py',41),
+  ('input -> VALUE','input',1,'p_input_number','lcl_parser.py',45),
+  ('input -> NAME','input',1,'p_input_name','lcl_parser.py',49),
 ]

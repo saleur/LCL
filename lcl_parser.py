@@ -11,10 +11,10 @@ def p_circuit_assign(p):
     names[p[1]] = p[3]
    
 
-def p_circuit_input(p):
-    'circuit : input'
-    print('Printing input!!')
-    print(p[1])
+#def p_circuit_input(p):
+#    'circuit : input'
+#    print('Printing input!!')
+#    print(p[1])
     #print('Printing input!!')
 
 def p_input_operation(p):
@@ -56,6 +56,8 @@ def p_input_name(p):
 
 def p_error(p):
     print("Syntax error at '%s'" % p.value)
+    print("Verify that all variable names")
+    print("have only one letter.")
     del operations[-1]
 
 import ply.yacc as yacc
@@ -68,21 +70,25 @@ try:
   LCLSourceFile = 'tCode.txt'
   with open(LCLSourceFile) as file_object:
       for line in file_object:
-          cleanLine = line.strip()
+          cleanLine = line.strip().replace(' ','')         
           print(cleanLine)
           operations.append(cleanLine)
           parser.parse(cleanLine)
   #Prints out every verified line of code:
   print('Verified operations')
-  inputs = 'input: '
-  circuits = 'circuit: '
+  inputs = ''
+  circuits = ''
+ 
   for op in operations:
+      op = op.replace('(','')
+      op = op.replace(')','')
       if len(op) == 3: 
-          inputs += op + ' '
+          inputs += op + '\n'
       else: 
-          circuits+= op + ' '
-  print(inputs)
-  print(circuits)              
+          circuits+= op + '\n'
+  print('inputs:\n' + inputs)
+  print('circuits:\n' + circuits)   
+
 except IOError:
    print("Error opening file")
    exit()

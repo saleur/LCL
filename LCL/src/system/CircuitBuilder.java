@@ -119,6 +119,7 @@ public class CircuitBuilder {
 		char inputName = inputDeclaration.charAt(0);		
 		
 		boolean inputValue = (inputDeclaration.charAt(2)=='1')? true : false;
+		//Add try catch for inputValue assignment
 		
 		inputs.put(inputName, inputValue);		
 		
