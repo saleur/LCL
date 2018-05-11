@@ -8,7 +8,8 @@ def LCLApplicationCreator(inputDeclarations,circuitDeclarations):
     appFile.write("import javax.swing.JFrame;\n")
     appFile.write("import javax.swing.JPanel;\n")
     appFile.write("import javax.swing.JScrollPane;\n")
-    appFile.write("import compoentsImages.Gates;\n")
+    appFile.write("import componentsImages.Gates;\n")
+    appFile.write("import system.*;\n\n")
 
     
     #Java class construction:
@@ -22,8 +23,8 @@ def LCLApplicationCreator(inputDeclarations,circuitDeclarations):
 
     #Write the main entry point:
     appFile.write("public static void main(String[] args)\n{\n")
-    appFile.write("\tLCLSystem sys = new LCLSystem();\n")
-    appFile.write("\tsys.setup();\n\tsys.run();\n}\n\n")
+    appFile.write("\tLCLApplication app = new LCLApplication();\n")
+    appFile.write("\tapp.setup();\n\tapp.run();\n}\n\n")
 
 
     #Write setup() method:

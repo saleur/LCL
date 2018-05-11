@@ -3,7 +3,9 @@ import java.awt.Color;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import compoentsImages.Gates;
+import componentsImages.Gates;
+import system.*;
+
 public class LCLApplication {
 
 
@@ -16,9 +18,9 @@ private Gates gates;//This will hold instantiate all the images for the gates.
 
 public static void main(String[] args)
 {
-	LCLSystem sys = new LCLSystem();
-	sys.setup();
-	sys.run();
+	LCLApplication app = new LCLApplication();
+	app.setup();
+	app.run();
 }
 
 private void setup()
