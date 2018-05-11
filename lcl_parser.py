@@ -2,6 +2,7 @@
 
 
 from lcl_lexer import tokens
+import LCLToJavaTranslator 
 
 names = { }#Used for verification purposes
 operations = []#At the end it will hold all valid operations.
@@ -83,11 +84,15 @@ try:
       op = op.replace('(','')
       op = op.replace(')','')
       if len(op) == 3: 
-          inputs += op + '\n'
+          inputs += op + '\\n'
       else: 
-          circuits+= op + '\n'
+          circuits+= op + '\\n'
   print('inputs:\n' + inputs)
-  print('circuits:\n' + circuits)   
+  print('circuits:\n' + circuits) 
+
+  if (len(inputs)>=1) and (len(circuits)>=1):
+      LCLToJavaTranslator.LCLApplicationCreator(inputs,circuits)
+
 
 except IOError:
    print("Error opening file")
