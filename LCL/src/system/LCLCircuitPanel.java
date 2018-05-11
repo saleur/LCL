@@ -1,5 +1,6 @@
 package system;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.util.ArrayList;
@@ -23,7 +24,13 @@ public class LCLCircuitPanel extends JPanel {
 	{
 		this.circuits = circuits;
 	}
-	
+
+	public void setPreferredSize(int numOfCircuits)
+	{
+		Dimension pDimensions = new Dimension(4000*numOfCircuits, 4000*numOfCircuits);
+		super.setPreferredSize(pDimensions);
+	}
+
 
 
 	public void paint(Graphics g) {		

@@ -19,6 +19,9 @@ public class CircuitBuilder {
 	
 	private int circuitXPos;
 	private int circuitYPos;
+
+	private String inputDeclarations;
+	private String circuitDeclarations;
 	
 	public CircuitBuilder(String codeFileName)
 	{
@@ -42,9 +45,55 @@ public class CircuitBuilder {
 		
 	}
 	
+	public CircuitBuilder(String inputDeclarations,String circuitDeclarations)
+	{
+		numOfCircuits = 0;
+		circuits = new ArrayList<>();
+		inputs = new HashMap<>();
+		operators = new HashMap<>();
+		this.inputDeclarations = inputDeclarations;
+		this.circuitDeclarations = circuitDeclarations;
+		circuitXPos = 20;
+		circuitYPos = 40;
+	}
+
+	
 	public ArrayList<Circuit> getCircuits()
 	{
 		return circuits;
+	}
+
+	public int getNumOfCircuits()
+	{
+		return numOfCircuits;
+	}
+
+	/**
+	 * This method constructs the circuits and their respective inputs.
+	 * NOTE: This method assumes that all declarations have been passed through 
+	 * the LCL parser.
+	 */
+	public void buildCircuits()
+	{
+		mapOperators();
+		Scanner inputStatements = new Scanner(inputDeclarations);
+		while(inputStatements.hasNext())
+		{
+			String inputDec = inputStatements.next();
+			constructInput(inputDec);
+		}
+		System.out.println("Finished building inputs");
+		inputStatements.close();
+
+		Scanner circuitStatements = new Scanner(circuitDeclarations);
+		while(circuitStatements.hasNext())
+		{
+			String circuitDec = circuitStatements.next();
+			constructCircuit(circuitDec);
+		}
+		System.out.println("Finished building circuits");
+		circuitStatements.close();
+
 	}
 	
 	

@@ -40,10 +40,10 @@ public class LCLSystem {
 		//NOTE: "args" needs to be used appropriately in the future.
 		LCLSystem sys = new LCLSystem();
 		
-		sys.inputSetup();
-		sys.inputRun();
-	//	sys.setup();
-	//	sys.run();
+		//sys.inputSetup();
+		//sys.inputRun();
+		sys.setup();
+		sys.run();
 	}
 	
 	private void inputSetup()
@@ -76,22 +76,24 @@ public class LCLSystem {
 		circuit = new LCLCircuitPanel();
 		
 		//NOTE: For the parameters of cpDimension some calculation must be done instead of using static numbers.
-	    Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
+	    //Dimension cpDimension = new Dimension(8000, 8000);//Will define the boundary of the circuitPanel.
 	    
-	    gates = new Gates();//Initializes the Gate Images
+		gates = new Gates();//Initializes the Gate Images
+		String inputDec = "A=1\nB=0\nC=1";
+		String circuitDec = "D=AandB\nE=CorBandA";
+	
+		circuitBuilder = new CircuitBuilder(inputDec, circuitDec);
+		circuitBuilder.buildCircuits();
+		
 	    
-	    
-		circuit.setPreferredSize(cpDimension);//
+		circuit.setPreferredSize(circuitBuilder.getNumOfCircuits());
 		circuit.setLocation(circuit.panelOffset(frame));
 		circuit.setVisible(true);//Will create a boolean flag later for this.
 		circuit.setBackground(Color.RED);
 		
-		circuitBuilder = new CircuitBuilder("testCode.txt");
-		circuitBuilder.buildCircuit();
+
 		
-		
-		
-		//circuit.setGates();
+	
 		circuit.addCircuits(circuitBuilder.getCircuits());
 			
 	    scrollableCircuit = new JScrollPane(circuit);//With this line the circuit is now scrollable.	 
