@@ -98,64 +98,155 @@ public class CircuitBuilder {
 	}
 	
 	
-	public void buildCircuit()
+	public void buildDynamicCircuits(String inputDec,String circuitDec) throws Exception
 	{
-		mapOperators();
+		//mapOperators();
+		HashMap<Character,Boolean> tempInputs = new HashMap<>();
+		HashMap<Character,Boolean> tempOutputs = new HashMap<>();
+		ArrayList<Circuit> tempCircuits = new ArrayList<>();
+		Scanner inputScanner=null, circuitScanner = null;
+		circuitYPos = 40;
+		if(inputDec.length()<3||circuitDec.length()<6)			
+			throw new Exception("Not enough characters in input or circuit declaration.");
+		
 		try
 		{
-			Scanner input = new Scanner(codeFile);
-		
-			String cursor = input.next();
-			if(cursor.equals("inputs:"))
+			inputScanner = new Scanner(inputDec);
+			while(inputScanner.hasNext())
 			{
-				cursor = input.next();
-				while(!(cursor.equals("circuit:"))){
-						
-					constructInput(cursor);
-					cursor = input.next();
-				}
-					
-				System.out.println("Inputs constructed:");
-				for(Character inputName : inputs.keySet())
-					System.out.println(inputName.toString() + '=' +inputs.get(inputName).toString());
-				
-				if(cursor.equals("circuit:"))
-				{
-					
-					while(input.hasNext())
-					{
-						cursor = input.next();
-						constructCircuit(cursor);
-					}
-					
-					System.out.println("Circuits Constructed:");
-					System.out.println(circuits.size());
-				}
-				else
-				{
-					System.out.println("CircuitBuilder: Error in code file format");
-					input.close();
-					return;
-				}
-				
+				String declaration = inputScanner.next();
+				try {					
+					contructDynamicInput(declaration,tempInputs);										
+				} catch (Exception e) {
+					inputScanner.close();
+					throw new Exception("Verify input declaration: " + declaration);					
+				}				
 			}
-			else
+			System.out.println("Finished constructing inputs.");				
+			inputScanner.close();
+
+			circuitScanner = new Scanner(circuitDec);
+			while(circuitScanner.hasNext())
 			{
-				System.out.println("CircuitBuilder: Error in code file format");
-				input.close();
-				return;
+				String declaration = circuitScanner.next();
+				try {
+					constructDynamicCircuit(declaration,tempCircuits,tempInputs, tempOutputs);					
+				} catch (Exception e) {
+					circuitScanner.close();
+					throw new Exception("Verify circuit declaration: " + declaration);
+				}
 			}
-				
-			
-			input.close();
-				
+			System.out.println("Finished constructing circuits.");
+			circuitScanner.close();
+
 		}catch(Exception e)
 		{
-			System.out.println("CircuitBuilder: Error message: " + e.getMessage());
-			System.out.println("CircuitBuilder: Error in contructCircuit() method.");
+			throw new Exception("Verify input and circuit declaration");
 		};
+
+		//If no error is found then all class atributes will be changed with the temporary or 'dynamic' ones.
+		inputs = tempInputs;
+		outputs = tempOutputs;
+		circuits = tempCircuits;
+		numOfCircuits = circuits.size();
+	}
+
+	private void contructDynamicInput(String inputDeclaration,HashMap<Character,Boolean> dynamicInputs) throws Exception
+	{
+		if(inputDeclaration.length()!=3)
+			throw new Exception("Input Declarations need to have a length of 3 characters");
+		if(!Character.isLetter(inputDeclaration.charAt(0))&&inputDeclaration.charAt(1)!='=')
+			throw new Exception("Error in input declaration");
+		if(inputDeclaration.charAt(2)!='1'&&inputDeclaration.charAt(2)!='0')
+			throw new Exception("The only acceptable value for an input are either '1' or '0'.");
+		
+		char inputName = inputDeclaration.charAt(0);
+		boolean inputValue = (inputDeclaration.charAt(2)=='1')? true : false;
+
+		dynamicInputs.put(inputName, inputValue);
+	}
+
+	private void constructDynamicCircuit(String circuitDeclaration, ArrayList<Circuit> dynamicCircuits,HashMap<Character,Boolean> dynamicInputs,HashMap<Character,Boolean> dynamicOutputs) throws Exception
+	{
+		if(!Character.isLetter(circuitDeclaration.charAt(0))&&circuitDeclaration.charAt(1)!='=')
+			throw new Exception();
+		
+		
+		Circuit newCircuit = new Circuit(circuitXPos, circuitYPos);
+		char circuitName = circuitDeclaration.charAt(0);
+		String operations  = circuitDeclaration.substring(3);
+		char[] componentInputNames = new char[2];
+		boolean[] componentInputValues = new boolean[2];
+		
+		componentInputNames[0] = circuitDeclaration.charAt(2);
+		componentInputValues[0]= getCorrectDynamicInputValue(circuitDeclaration.charAt(2),dynamicInputs,dynamicOutputs);
+			
+		String operator = "";
+		
+		int i = 0;
+		while(i < operations.length())
+		{
+			char c = operations.charAt(i);
+			if(Character.isLowerCase(c))
+				operator += c;
+			else
+				break;
+			i++;
+		}
+	
+		componentInputNames[1] = operations.charAt(i);
+		
+		componentInputValues[1] = getCorrectInputValue(operations.charAt(i));
+			
+		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues);
+			
+		
+		operator = "";
+		i++;
+			
+		boolean tempInputValue;
+		while(i<operations.length())
+		{
+			char c = operations.charAt(i);
+			if(Character.isLowerCase(c))
+				operator += c;
+			else
+			{
+				tempInputValue = getCorrectInputValue(c);
+				newCircuit.addComponent(operators.get(operator),c,tempInputValue);
+				operator = "";
+			}
+				
+			i++;
+		}
+
+		boolean circuitOutput = newCircuit.getCircuitOutput();
+		dynamicOutputs.put(circuitName,circuitOutput);
+			
+		dynamicCircuits.add(newCircuit);	
+		
+		circuitYPos +=200;			
+		
 	}
 	
+	private Boolean getCorrectDynamicInputValue(char inputName,HashMap<Character,Boolean> dynamicInputs, HashMap<Character,Boolean> dynamicOutputs)
+	{
+		Boolean inputsValue = dynamicInputs.get(inputName);
+		
+		Boolean outputsValue = null;
+
+		if(outputs.size()>0)
+			outputsValue = dynamicOutputs.get(inputName);
+
+		if(inputsValue!=null)
+			return inputsValue;
+			
+		else if(outputsValue!=null)
+			return outputsValue; 
+
+	    return null;
+	}
+
 	
 	private void constructInput(String inputDeclaration)
 	{
@@ -200,15 +291,14 @@ public class CircuitBuilder {
 				break;
 			i++;
 		}
-		
-		//System.out.println("Finished first while loop");
+
 		componentInputNames[1] = operations.charAt(i);
 	
 		componentInputValues[1] = getCorrectInputValue(operations.charAt(i));
 		
 		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues);
 		
-		//System.out.println("Good at line 149");
+	
 		operator = "";
 		i++;
 		
@@ -231,10 +321,7 @@ public class CircuitBuilder {
 		boolean circuitOutput = newCircuit.getCircuitOutput();
 		outputs.put(circuitName,circuitOutput);
 		
-		circuits.add(newCircuit);
-		
-		//System.out.println("Good at line 170");
-		
+		circuits.add(newCircuit);		
 		
 		numOfCircuits++;
 		circuitYPos +=200;
