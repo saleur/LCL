@@ -33,29 +33,30 @@ public class Circuit {
 		size = 0;
 	}
 	
-	public void addFirstComponent(GateType gType,char[] inputNames,boolean[] inputValues)
+	//Note: Added output name to method
+	public void addFirstComponent(GateType gType,char[] inputNames,boolean[] inputValues,char outputName)
 	{
 		Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
 		LogicalGate newComponent=null;
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND]);
+				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND],outputName);
 				break;
 			case OR:
-				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR]);
+				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR],outputName);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND]);
+				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND],outputName);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR]);
+				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR],outputName);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR]);
+				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR],outputName);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR]);
+				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR],outputName);
 				break;
 			default:
 				System.out.println("Invalid gType given");
@@ -67,31 +68,32 @@ public class Circuit {
 		size++;
 	}
 	
-	public void addComponent(GateType gType,char inputName,boolean inputValue)
+	//Note: Added output name to method
+	public void addComponent(GateType gType,char inputName,boolean inputValue,char outputName)
 	{
 		Point location = new Point(startXPos + OFFX * size, startYPos + OFFY * size);
 		LogicalGate newComponent=null;
-		char[] inputNames = new char[] {'O',inputName};//NOTE: Placing 'O' as place holder this needs to be changed later.
+		char[] inputNames = new char[] {outputName,inputName};//NOTE: Placing 'O' as place holder this needs to be changed later.
 		boolean[] inputValues  = new boolean[] {components.get(size-1).output(),inputValue};
 		switch(gType)
 		{
 			case AND: 
-				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND]);
+				newComponent = new ANDGate(inputNames,inputValues, location, Gates.GateImgs[Gates.AND], outputName);
 				break;
 			case OR:
-				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR]);
+				newComponent = new ORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.OR],outputName);
 				break;
 			case NAND:
-				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND]);
+				newComponent = new NANDGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NAND],outputName);
 				break;
 			case NOR:
-				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR]);
+				newComponent = new NORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.NOR],outputName);
 				break;
 			case XNOR:
-				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR]);
+				newComponent = new XNORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XNOR],outputName);
 				break;
 			case XOR:
-				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR]);
+				newComponent = new XORGate(inputNames,inputValues,location, Gates.GateImgs[Gates.XOR],outputName);
 				break;
 			default:
 				System.out.println("Invalid gType given");
@@ -102,12 +104,20 @@ public class Circuit {
 		
 	}
 	
+	//iterates for every component, draws the output name if is last component
 	public void drawCircuit(Graphics g)
 	{
-		for(LogicalGate gate : components)
-			gate.draw(g);
+		//for(LogicalGate gate : components)
+			//		gate.draw(g);
+			
+			for(int i = 0; i< components.size(); i++){
+				components.get(i).draw(g,false);
+				if(i == components.size()-1){
+					components.get(i).draw(g, true);
+				}	
+			}
 	}
-	
+
 	public void updateInputs(HashMap<Character,Boolean> inputs) {
 		
 		for(Character c : inputs.keySet())
@@ -117,6 +127,7 @@ public class Circuit {
 		}
 	}
 	
+
 	public void updateOutputs()
 	{
 		for(int i = 0; i < size; i++)
@@ -126,5 +137,10 @@ public class Circuit {
 	public boolean getCircuitOutput()
 	{
 		return components.get(size-1).output();
+	}
+	
+	
+	public ArrayList<LogicalGate> components(){
+		return components;
 	}
 }

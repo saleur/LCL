@@ -7,8 +7,8 @@ import java.awt.image.BufferedImage;
 
 public class ORGate extends AbstractLogicalGate {
 
-	public ORGate(char[] inputNames,boolean[] inputValues, Point location, BufferedImage gateImg) {
-		super(inputNames,inputValues, location, gateImg);
+	public ORGate(char[] inputNames,boolean[] inputValues, Point location, BufferedImage gateImg, char outputName) {
+		super(inputNames,inputValues, location, gateImg,outputName);
 
 		if(inputValues[0] == true || inputValues[1] == true)
 			output = true;
@@ -26,7 +26,7 @@ public class ORGate extends AbstractLogicalGate {
 	}
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, boolean last) {
 		g.drawImage(gateImg,location.x,location.y,null);
     	
     	String input1, input2;
@@ -35,9 +35,16 @@ public class ORGate extends AbstractLogicalGate {
     	
     	input2 = (inputValues[1]) ? "1" : "0";
     	    	
-    	g.setColor(Color.BLACK);
+    	g.setColor(Color.BLUE);
     	
+    	
+    	g.drawString(Character.toString(inputNames[0]), location.x+20, location.y+10);
+       	g.setColor(Color.BLACK);
     	g.drawString(input1, location.x+40, location.y+30);
+    	
+    	g.setColor(Color.BLUE);
+    	g.drawString(Character.toString(inputNames[1]), location.x+20, location.y+70);
+    	g.setColor(Color.BLACK);
     	g.drawString(input2, location.x+40, location.y+90);
     	
     	if(output)
@@ -45,6 +52,10 @@ public class ORGate extends AbstractLogicalGate {
     	else
     		g.drawString("0", location.x+220, location.y+63);
     			
+    	if(last){
+    		g.setColor(Color.BLUE);
+    		g.drawString(Character.toString(outputName), location.x+240,  location.y+43);
+    	}
 	}
 
 }

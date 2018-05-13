@@ -9,9 +9,9 @@ import java.awt.image.BufferedImage;
 public class ANDGate extends AbstractLogicalGate {
 	
 	
-	public ANDGate(char[] inputNames,boolean[] inputValues,Point location,BufferedImage gateImg)
+	public ANDGate(char[] inputNames,boolean[] inputValues,Point location,BufferedImage gateImg, char outputName)
 	{
-		super(inputNames,inputValues,location,gateImg);
+		super(inputNames,inputValues,location,gateImg,outputName);
 		if(inputValues[0] == true && inputValues[1] == true)
 			output = true;
 		else
@@ -30,7 +30,7 @@ public class ANDGate extends AbstractLogicalGate {
 
 
 	@Override
-	public void draw(Graphics g) {
+	public void draw(Graphics g, boolean last) {
 		g.drawImage(gateImg,location.x,location.y,null);
     	
     	String input1, input2;
@@ -39,9 +39,16 @@ public class ANDGate extends AbstractLogicalGate {
     	
     	input2 = (inputValues[1]) ? "1" : "0";    	
     	
-    	g.setColor(Color.BLACK);
+    	g.setColor(Color.BLUE);
     	
+
+    	g.drawString(Character.toString(inputNames[0]), location.x+20, location.y+10);
+    	g.setColor(Color.BLACK);
     	g.drawString(input1, location.x+40, location.y+30);
+    	
+    	g.setColor(Color.BLUE);
+    	g.drawString(Character.toString(inputNames[1]), location.x+20, location.y+70);
+    	g.setColor(Color.BLACK);
     	g.drawString(input2, location.x+40, location.y+90);
     	
     	if(output)
@@ -49,8 +56,20 @@ public class ANDGate extends AbstractLogicalGate {
     	else
     		g.drawString("0", location.x+200, location.y+63);
     	
-		
+    	if(last){
+    		g.setColor(Color.BLUE);
+    		g.drawString(Character.toString(outputName), location.x+220,  location.y+43);
+    	}
+    	
+
+    	
 	}
+	
+//	public void drawOutputName(Graphics g){
+//		
+//		g.drawString(Character.toString(outputName), location.x+180,  location.y+53);
+//		
+//	}
 
 
 }

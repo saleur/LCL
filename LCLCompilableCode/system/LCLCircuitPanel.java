@@ -23,6 +23,15 @@ public class LCLCircuitPanel extends JPanel {
 	public void addCircuits(ArrayList<Circuit> circuits)
 	{
 		this.circuits = circuits;
+		System.out.println("Succesfull Assignment");
+		
+		boolean[] inputValues;
+		
+		inputValues = circuits.get(0).components().get(0).inputValues();
+		
+		System.out.println("B = " + inputValues[1]);
+
+		
 	}
 
 	public void setPreferredSize(int numOfCircuits)
@@ -65,6 +74,8 @@ public class LCLCircuitPanel extends JPanel {
 		
 		return new Point(frame.getX()-panelOffX,frame.getY()-panelOffY);
 	}
+	
+	
 	
 	
 	

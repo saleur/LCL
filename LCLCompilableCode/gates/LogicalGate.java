@@ -19,7 +19,11 @@ public interface LogicalGate {
 			
 	public void updateOutput();
 	
-	public void draw(Graphics g);
+	public void draw(Graphics g, boolean last);
+	
+	 public char[] inputNames();
+	 
+	 public boolean[] inputValues();
 	
 	
 	

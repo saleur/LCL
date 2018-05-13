@@ -125,6 +125,11 @@ public class CircuitBuilder {
 			System.out.println("Finished constructing inputs.");				
 			inputScanner.close();
 
+			//Debugging
+			for(Character c: inputs.keySet()){
+				System.out.println(c + "," + tempInputs.get(c));
+			}
+			
 			circuitScanner = new Scanner(circuitDec);
 			while(circuitScanner.hasNext())
 			{
@@ -145,10 +150,23 @@ public class CircuitBuilder {
 		};
 
 		//If no error is found then all class atributes will be changed with the temporary or 'dynamic' ones.
+		
+		
+	
+		
 		inputs = tempInputs;
 		outputs = tempOutputs;
 		circuits = tempCircuits;
 		numOfCircuits = circuits.size();
+		
+		//Debugging
+				for(Character c: inputs.keySet()){
+					System.out.println(c + "," + inputs.get(c));
+				}
+		//Debugging
+		for(Character c: inputs.keySet()){
+			System.out.println(c + "," + tempInputs.get(c));
+		}
 	}
 
 	private void contructDynamicInput(String inputDeclaration,HashMap<Character,Boolean> dynamicInputs) throws Exception
@@ -196,9 +214,9 @@ public class CircuitBuilder {
 	
 		componentInputNames[1] = operations.charAt(i);
 		
-		componentInputValues[1] = getCorrectInputValue(operations.charAt(i));
+		componentInputValues[1] = getCorrectDynamicInputValue(operations.charAt(i),dynamicInputs,dynamicOutputs);
 			
-		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues);
+		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues,circuitName);
 			
 		
 		operator = "";
@@ -213,7 +231,7 @@ public class CircuitBuilder {
 			else
 			{
 				tempInputValue = getCorrectInputValue(c);
-				newCircuit.addComponent(operators.get(operator),c,tempInputValue);
+				newCircuit.addComponent(operators.get(operator),c,tempInputValue, circuitName);
 				operator = "";
 			}
 				
@@ -296,7 +314,7 @@ public class CircuitBuilder {
 	
 		componentInputValues[1] = getCorrectInputValue(operations.charAt(i));
 		
-		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues);
+		newCircuit.addFirstComponent(operators.get(operator),componentInputNames, componentInputValues,circuitName);
 		
 	
 		operator = "";
@@ -311,7 +329,7 @@ public class CircuitBuilder {
 			else
 			{
 				tempInputValue = getCorrectInputValue(c);
-				newCircuit.addComponent(operators.get(operator),c,tempInputValue);
+				newCircuit.addComponent(operators.get(operator),c,tempInputValue,circuitName);
 				operator = "";
 			}
 			

@@ -13,6 +13,7 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     protected char[] inputNames;
     protected boolean[] inputValues;
     protected boolean output;
+    protected char outputName;
     protected BufferedImage gateImg;
     
     
@@ -21,13 +22,22 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     
    
     
-    
-    public AbstractLogicalGate(char[] inputNames,boolean[] inputValues,Point location,BufferedImage gateImg)
+    //Note: Added outputName to constructor
+    public AbstractLogicalGate(char[] inputNames,boolean[] inputValues,Point location,BufferedImage gateImg, char outputName)
     {
     	this.inputNames = inputNames;
     	this.inputValues = inputValues;
     	this.location = location;
     	this.gateImg = gateImg;
+    	this.outputName = outputName;
+    }
+    
+    public char[] inputNames(){
+    	return inputNames;
+    }
+    
+    public boolean[] inputValues(){
+    	return inputValues;
     }
     
     public boolean output()
@@ -38,6 +48,10 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     public boolean[] inputs()
     {
     	return inputValues;
+    }
+    
+    public char outputName(){
+    	return outputName;
     }
     
     public Point location()
@@ -54,7 +68,7 @@ public abstract class AbstractLogicalGate implements LogicalGate{
     
 
     
-    public abstract void draw(Graphics g);
+    public abstract void draw(Graphics g, boolean last);
     
     
     
