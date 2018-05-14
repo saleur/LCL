@@ -1,2 +1,0 @@
-A = (B or C)
-D = (A and C)

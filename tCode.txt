@@ -1,7 +1,0 @@
-A=1
-B=0
-C=AandB
-EF = BorC
-D=BorC
-G = (AnorB)andD
-Z =AnorBxorCandD

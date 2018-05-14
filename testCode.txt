@@ -1,7 +1,0 @@
-A=1
-B=0
-C=1
-D=0
-E=1
-F=(AandB)or(CxorD)
-G=(BandD)norC
