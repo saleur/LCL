@@ -1,0 +1,528 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> circuit
+Rule 1     circuit -> NAME EQUALS input
+Rule 2     input -> input AND input
+Rule 3     input -> input OR input
+Rule 4     input -> input XOR input
+Rule 5     input -> input NAND input
+Rule 6     input -> input NOR input
+Rule 7     input -> input XNOR input
+Rule 8     input -> LPAREN input RPAREN
+Rule 9     input -> VALUE
+Rule 10    input -> NAME
+
+Terminals, with rules where they appear
+
+AND                  : 2
+EQUALS               : 1
+LPAREN               : 8
+NAME                 : 1 10
+NAND                 : 5
+NOR                  : 6
+OR                   : 3
+RPAREN               : 8
+VALUE                : 9
+XNOR                 : 7
+XOR                  : 4
+error                : 
+
+Nonterminals, with rules where they appear
+
+circuit              : 0
+input                : 1 2 2 3 3 4 4 5 5 6 6 7 7 8
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . circuit
+    (1) circuit -> . NAME EQUALS input
+
+    NAME            shift and go to state 1
+
+    circuit                        shift and go to state 2
+
+state 1
+
+    (1) circuit -> NAME . EQUALS input
+
+    EQUALS          shift and go to state 3
+
+
+state 2
+
+    (0) S' -> circuit .
+
+
+
+state 3
+
+    (1) circuit -> NAME EQUALS . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 7
+
+state 4
+
+    (10) input -> NAME .
+
+    AND             reduce using rule 10 (input -> NAME .)
+    OR              reduce using rule 10 (input -> NAME .)
+    XOR             reduce using rule 10 (input -> NAME .)
+    NAND            reduce using rule 10 (input -> NAME .)
+    NOR             reduce using rule 10 (input -> NAME .)
+    XNOR            reduce using rule 10 (input -> NAME .)
+    $end            reduce using rule 10 (input -> NAME .)
+    RPAREN          reduce using rule 10 (input -> NAME .)
+
+
+state 5
+
+    (9) input -> VALUE .
+
+    AND             reduce using rule 9 (input -> VALUE .)
+    OR              reduce using rule 9 (input -> VALUE .)
+    XOR             reduce using rule 9 (input -> VALUE .)
+    NAND            reduce using rule 9 (input -> VALUE .)
+    NOR             reduce using rule 9 (input -> VALUE .)
+    XNOR            reduce using rule 9 (input -> VALUE .)
+    $end            reduce using rule 9 (input -> VALUE .)
+    RPAREN          reduce using rule 9 (input -> VALUE .)
+
+
+state 6
+
+    (8) input -> LPAREN . input RPAREN
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 8
+
+state 7
+
+    (1) circuit -> NAME EQUALS input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+    $end            reduce using rule 1 (circuit -> NAME EQUALS input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+
+state 8
+
+    (8) input -> LPAREN input . RPAREN
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+    RPAREN          shift and go to state 15
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+
+state 9
+
+    (2) input -> input AND . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 16
+
+state 10
+
+    (7) input -> input XNOR . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 17
+
+state 11
+
+    (4) input -> input XOR . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 18
+
+state 12
+
+    (5) input -> input NAND . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 19
+
+state 13
+
+    (3) input -> input OR . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 20
+
+state 14
+
+    (6) input -> input NOR . input
+    (2) input -> . input AND input
+    (3) input -> . input OR input
+    (4) input -> . input XOR input
+    (5) input -> . input NAND input
+    (6) input -> . input NOR input
+    (7) input -> . input XNOR input
+    (8) input -> . LPAREN input RPAREN
+    (9) input -> . VALUE
+    (10) input -> . NAME
+
+    LPAREN          shift and go to state 6
+    VALUE           shift and go to state 5
+    NAME            shift and go to state 4
+
+    input                          shift and go to state 21
+
+state 15
+
+    (8) input -> LPAREN input RPAREN .
+
+    AND             reduce using rule 8 (input -> LPAREN input RPAREN .)
+    OR              reduce using rule 8 (input -> LPAREN input RPAREN .)
+    XOR             reduce using rule 8 (input -> LPAREN input RPAREN .)
+    NAND            reduce using rule 8 (input -> LPAREN input RPAREN .)
+    NOR             reduce using rule 8 (input -> LPAREN input RPAREN .)
+    XNOR            reduce using rule 8 (input -> LPAREN input RPAREN .)
+    $end            reduce using rule 8 (input -> LPAREN input RPAREN .)
+    RPAREN          reduce using rule 8 (input -> LPAREN input RPAREN .)
+
+
+state 16
+
+    (2) input -> input AND input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 2 (input -> input AND input .)
+    RPAREN          reduce using rule 2 (input -> input AND input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 2 (input -> input AND input .) ]
+  ! OR              [ reduce using rule 2 (input -> input AND input .) ]
+  ! XOR             [ reduce using rule 2 (input -> input AND input .) ]
+  ! NAND            [ reduce using rule 2 (input -> input AND input .) ]
+  ! NOR             [ reduce using rule 2 (input -> input AND input .) ]
+  ! XNOR            [ reduce using rule 2 (input -> input AND input .) ]
+
+
+state 17
+
+    (7) input -> input XNOR input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 7 (input -> input XNOR input .)
+    RPAREN          reduce using rule 7 (input -> input XNOR input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 7 (input -> input XNOR input .) ]
+  ! OR              [ reduce using rule 7 (input -> input XNOR input .) ]
+  ! XOR             [ reduce using rule 7 (input -> input XNOR input .) ]
+  ! NAND            [ reduce using rule 7 (input -> input XNOR input .) ]
+  ! NOR             [ reduce using rule 7 (input -> input XNOR input .) ]
+  ! XNOR            [ reduce using rule 7 (input -> input XNOR input .) ]
+
+
+state 18
+
+    (4) input -> input XOR input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 4 (input -> input XOR input .)
+    RPAREN          reduce using rule 4 (input -> input XOR input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 4 (input -> input XOR input .) ]
+  ! OR              [ reduce using rule 4 (input -> input XOR input .) ]
+  ! XOR             [ reduce using rule 4 (input -> input XOR input .) ]
+  ! NAND            [ reduce using rule 4 (input -> input XOR input .) ]
+  ! NOR             [ reduce using rule 4 (input -> input XOR input .) ]
+  ! XNOR            [ reduce using rule 4 (input -> input XOR input .) ]
+
+
+state 19
+
+    (5) input -> input NAND input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 5 (input -> input NAND input .)
+    RPAREN          reduce using rule 5 (input -> input NAND input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 5 (input -> input NAND input .) ]
+  ! OR              [ reduce using rule 5 (input -> input NAND input .) ]
+  ! XOR             [ reduce using rule 5 (input -> input NAND input .) ]
+  ! NAND            [ reduce using rule 5 (input -> input NAND input .) ]
+  ! NOR             [ reduce using rule 5 (input -> input NAND input .) ]
+  ! XNOR            [ reduce using rule 5 (input -> input NAND input .) ]
+
+
+state 20
+
+    (3) input -> input OR input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 3 (input -> input OR input .)
+    RPAREN          reduce using rule 3 (input -> input OR input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 3 (input -> input OR input .) ]
+  ! OR              [ reduce using rule 3 (input -> input OR input .) ]
+  ! XOR             [ reduce using rule 3 (input -> input OR input .) ]
+  ! NAND            [ reduce using rule 3 (input -> input OR input .) ]
+  ! NOR             [ reduce using rule 3 (input -> input OR input .) ]
+  ! XNOR            [ reduce using rule 3 (input -> input OR input .) ]
+
+
+state 21
+
+    (6) input -> input NOR input .
+    (2) input -> input . AND input
+    (3) input -> input . OR input
+    (4) input -> input . XOR input
+    (5) input -> input . NAND input
+    (6) input -> input . NOR input
+    (7) input -> input . XNOR input
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+  ! shift/reduce conflict for XOR resolved as shift
+  ! shift/reduce conflict for NAND resolved as shift
+  ! shift/reduce conflict for NOR resolved as shift
+  ! shift/reduce conflict for XNOR resolved as shift
+    $end            reduce using rule 6 (input -> input NOR input .)
+    RPAREN          reduce using rule 6 (input -> input NOR input .)
+    AND             shift and go to state 9
+    OR              shift and go to state 13
+    XOR             shift and go to state 11
+    NAND            shift and go to state 12
+    NOR             shift and go to state 14
+    XNOR            shift and go to state 10
+
+  ! AND             [ reduce using rule 6 (input -> input NOR input .) ]
+  ! OR              [ reduce using rule 6 (input -> input NOR input .) ]
+  ! XOR             [ reduce using rule 6 (input -> input NOR input .) ]
+  ! NAND            [ reduce using rule 6 (input -> input NOR input .) ]
+  ! NOR             [ reduce using rule 6 (input -> input NOR input .) ]
+  ! XNOR            [ reduce using rule 6 (input -> input NOR input .) ]
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 16 resolved as shift
+WARNING: shift/reduce conflict for OR in state 16 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 16 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 16 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 16 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 16 resolved as shift
+WARNING: shift/reduce conflict for AND in state 17 resolved as shift
+WARNING: shift/reduce conflict for OR in state 17 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 17 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 17 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 17 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 17 resolved as shift
+WARNING: shift/reduce conflict for AND in state 18 resolved as shift
+WARNING: shift/reduce conflict for OR in state 18 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 18 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 18 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 18 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 18 resolved as shift
+WARNING: shift/reduce conflict for AND in state 19 resolved as shift
+WARNING: shift/reduce conflict for OR in state 19 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 19 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 19 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 19 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 19 resolved as shift
+WARNING: shift/reduce conflict for AND in state 20 resolved as shift
+WARNING: shift/reduce conflict for OR in state 20 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 20 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 20 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 20 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 20 resolved as shift
+WARNING: shift/reduce conflict for AND in state 21 resolved as shift
+WARNING: shift/reduce conflict for OR in state 21 resolved as shift
+WARNING: shift/reduce conflict for XOR in state 21 resolved as shift
+WARNING: shift/reduce conflict for NAND in state 21 resolved as shift
+WARNING: shift/reduce conflict for NOR in state 21 resolved as shift
+WARNING: shift/reduce conflict for XNOR in state 21 resolved as shift
