@@ -1,4 +1,0 @@
-Compilation Instructions:
-
-a)javac -d runnable -sourcepath LCLCompilable  LCLCompilable/app/LCLApplication.java
-b)java -classpath runnable app.LCLApplication
