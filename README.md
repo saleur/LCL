@@ -10,3 +10,5 @@ Sometimes you want to simulate a simple logical circuit and you don’t want to 
 * Translate LCL’s simple grammar into complex Java code that can be compiled and run.
 * Create a GUI that presents your logical circuits and simulates them and allows for  real-time editing of those circuits.
 
+## Video Tutorial
+[![Video Tutorial](https://img.youtube.com/vi/668EVaHnnJc/0.jpg)](https://www.youtube.com/watch?v=668EVaHnnJc)
