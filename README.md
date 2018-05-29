@@ -11,5 +11,7 @@ Sometimes you want to simulate a simple logical circuit and you don’t want to 
 * Create a GUI that presents your logical circuits and simulates them and allows for  real-time editing of those circuits.
 
 ## Video Tutorial
+
 Click on the image below to see the Video Tutorial
+
 [![Video Tutorial](https://img.youtube.com/vi/668EVaHnnJc/0.jpg)](https://www.youtube.com/watch?v=668EVaHnnJc)
